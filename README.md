@@ -6,6 +6,20 @@ A responsive weather application built with **HTML, CSS, and JavaScript**, using
 
 [View Live Demo]( https://adnanalkrde.github.io/weather-app/)
 
+## 📸 Screenshots
+
+### Home Page
+
+![Weather App Home](screenshots/home.png)
+
+### Weather Details
+
+![Weather App Weather](screenshots/weather.png)
+
+### 5-Day Forecast
+
+![Weather App Forecast](screenshots/forecast.png)
+
 ## 📌 Features
 
 * 🔍 Search for weather by city
