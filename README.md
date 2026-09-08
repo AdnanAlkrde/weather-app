@@ -4,7 +4,7 @@ A responsive weather application built with **HTML, CSS, and JavaScript**, using
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://adnankrde.github.io/weather-app/)
+[View Live Demo]( https://adnanalkrde.github.io/weather-app/)
 
 ## 📌 Features
 
