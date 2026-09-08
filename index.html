@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Weather App</title>
+
+    <!-- Google Fonts -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="weather-app">
+
+
+        <!-- =========================
+        Header
+        ========================== -->
+
+        <header class="header">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-cloud-sun"></i>
+
+                <span>Weather</span>
+
+            </div>
+
+
+            <button
+                class="theme-btn"
+                id="themeBtn"
+                aria-label="Toggle dark mode"
+            >
+
+                <i class="fa-solid fa-moon"></i>
+
+            </button>
+
+        </header>
+
+
+        <!-- =========================
+             Search
+        ========================== -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search for a city..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="searchBtn"
+                    type="button"
+                    aria-label="Search"
+                >
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- Suggestions -->
+
+            <div
+                class="suggestions"
+                id="suggestions"
+                hidden
+            ></div>
+
+
+            <!-- Current Location -->
+
+            <button
+                class="location-btn"
+                id="locationBtn"
+                type="button"
+            >
+
+                <i class="fa-solid fa-location-crosshairs"></i>
+
+                <span>Use My Location</span>
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             Loading
+        ========================== -->
+
+        <div
+            class="loading"
+            id="loading"
+            hidden
+        >
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <span>Loading weather...</span>
+
+        </div>
+
+
+        <!-- =========================
+             Error
+        ========================== -->
+
+        <div
+            class="error-message"
+            id="errorMessage"
+            hidden
+        >
+
+            <i class="fa-solid fa-circle-exclamation"></i>
+
+            <span id="errorText"></span>
+
+        </div>
+
+
+        <!-- =========================
+             Current Weather
+        ========================== -->
+
+        <section
+            class="current-weather"
+            id="currentWeather"
+            hidden
+        >
+
+            <!-- Location -->
+
+            <div class="location">
+
+                <div class="location-name">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <h1 id="cityName">--</h1>
+
+                </div>
+
+                <p id="countryName">--</p>
+
+                <p
+                    class="date"
+                    id="currentDate"
+                >
+                    --
+                </p>
+
+            </div>
+
+
+            <!-- Main Weather -->
+
+            <div class="main-weather">
+
+                <div
+                    class="weather-icon"
+                    id="weatherIcon"
+                >
+                    🌤️
+                </div>
+
+
+                <div class="temperature">
+
+                    <span id="temperature">--</span>
+
+                    <span class="temperature-unit">
+                        °C
+                    </span>
+
+                </div>
+
+
+                <p
+                    class="weather-description"
+                    id="weatherDescription"
+                >
+                    --
+                </p>
+
+
+                <div class="high-low">
+
+                    <span>
+
+                        <i class="fa-solid fa-arrow-up"></i>
+
+                        <strong id="maxTemp">
+                            --°
+                        </strong>
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="fa-solid fa-arrow-down"></i>
+
+                        <strong id="minTemp">
+                            --°
+                        </strong>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Weather Details -->
+
+            <div class="weather-details">
+
+
+                <!-- Humidity -->
+
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-droplet"></i>
+
+                    </div>
+
+                    <div class="detail-info">
+
+                        <span>Humidity</span>
+
+                        <strong id="humidity">
+                            --%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Wind -->
+
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-wind"></i>
+
+                    </div>
+
+                    <div class="detail-info">
+
+                        <span>Wind Speed</span>
+
+                        <strong id="wind">
+                            -- km/h
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Feels Like -->
+
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-temperature-half"></i>
+
+                    </div>
+
+                    <div class="detail-info">
+
+                        <span>Feels Like</span>
+
+                        <strong id="feelsLike">
+                            --°C
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Pressure -->
+
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-gauge-high"></i>
+
+                    </div>
+
+                    <div class="detail-info">
+
+                        <span>Pressure</span>
+
+                        <strong id="pressure">
+                            -- hPa
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Visibility -->
+
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                    </div>
+
+                    <div class="detail-info">
+
+                        <span>Visibility</span>
+
+                        <strong id="visibility">
+                            -- km
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- UV -->
+
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-sun"></i>
+
+                    </div>
+
+                    <div class="detail-info">
+
+                        <span>UV Index</span>
+
+                        <strong id="uvIndex">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             Forecast
+        ========================== -->
+
+        <section
+            class="forecast-section"
+            id="forecastSection"
+            hidden
+        >
+
+            <div class="section-title">
+
+                <h2>5 Day Forecast</h2>
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+            </div>
+
+
+            <div
+                class="forecast-container"
+                id="forecastContainer"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             Temperature Unit
+        ========================== -->
+
+        <div
+            class="unit-section"
+            id="unitSection"
+            hidden
+        >
+
+            <span>Temperature:</span>
+
+            <button
+                class="unit-btn active"
+                id="celsiusBtn"
+                type="button"
+            >
+                °C
+            </button>
+
+            <button
+                class="unit-btn"
+                id="fahrenheitBtn"
+                type="button"
+            >
+                °F
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             Footer
+        ========================== -->
+
+        <footer class="footer">
+
+            <p>
+                Weather data updates automatically
+            </p>
+
+            <span>
+                Made with HTML • CSS • JavaScript
+            </span>
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+
